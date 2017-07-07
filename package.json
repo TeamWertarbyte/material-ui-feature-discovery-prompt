@@ -51,6 +51,7 @@
     "react": "^15.5.4"
   },
   "dependencies": {
-    "prop-types": "^15.5.8"
+    "prop-types": "^15.5.8",
+    "react-height": "^3.0.0"
   }
 }
