@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { findDOMNode } from 'react-dom'
-import injectStyle from './injectStyle'
+import { render, unmountComponentAtNode } from 'react-dom'
+import Circles from './Circles'
 
 /**
  * Material design feature discovery prompt
@@ -10,17 +10,7 @@ import injectStyle from './injectStyle'
 export default class FeatureDiscoveryPrompt extends Component {
   constructor (props) {
     super(props)
-    injectStyle(`
-    @keyframes innerPulse {
-      0%      { transform: scale(1.0); }    
-      100%    { transform: scale(1.1); }
-    }`)
 
-    injectStyle(`
-    @keyframes outerPulse {
-      0%      { transform: scale(1.0); opacity: 0.9 }    
-      100%    { transform: scale(2.0); opacity: 0.0 }
-    }`)
     this.state = {
       pos: {
         top: 1,
@@ -32,78 +22,54 @@ export default class FeatureDiscoveryPrompt extends Component {
     }
   }
 
-  getStyles () {
-    const {pos} = this.state
-    const circleSize = pos.width + 40
-    const outerCircleSize = Math.min(window.innerWidth, 900)
-    return {
-      root: {
-        zIndex: 1000,
-      },
-      circles: {
-        position: 'relative',
-        top: `-${(pos.height / 2) + (circleSize / 2)}px`,
-        left: `${(pos.width / 2) - (circleSize / 2)}px`,
-      },
-      pulseInnerCircle: {
-        position: 'absolute',
-        transformOrigin: 'center center',
-        height: `${circleSize}px`,
-        width: `${circleSize}px`,
-        borderRadius: '50%',
-        backgroundColor: 'white',
-        opacity: 0.9,
-        animation: 'innerPulse 872ms cubic-bezier(0.4, 0, 0.2, 1) alternate infinite'
-      },
-      pulseOuterCircle: {
-        position: 'absolute',
-        transformOrigin: 'center center',
-        height: `${circleSize}px`,
-        width: `${circleSize}px`,
-        borderRadius: '50%',
-        backgroundColor: 'white',
-        opacity: 0.9,
-        animation: 'outerPulse 1744ms cubic-bezier(0.4, 0, 0.2, 1) infinite'
-      },
-      outerCircle: {
-        position: 'absolute',
-        transformOrigin: 'center center',
-        marginTop: `-${(outerCircleSize / 2) - (circleSize / 2)}px`,
-        marginLeft: `-${(outerCircleSize / 2) - (circleSize / 2)}px`,
-        height: `${outerCircleSize}px`,
-        width: `${outerCircleSize}px`,
-        borderRadius: '50%',
-        backgroundColor: 'orange',
-        opacity: 0.9,
-      }
+  componentDidMount () {
+    this.portal = document.createElement('div')
+    document.body.appendChild(this.portal)
+    this.portal.style.position = 'fixed'
+    this.portal.style.zIndex = 1
+    this.portal.style.top = 0
+    this.portal.style.left = 0
+
+    this.renderCircle()
+  }
+
+  componentWillUnmount () {
+    unmountComponentAtNode(this.portal)
+    this.portal = null
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.open && !this.props.open) {
+      console.log(this.circles)
+      this.circles.open()
     }
   }
 
-  componentDidMount () {
-    this.setState({pos: this.content.getBoundingClientRect()})
+  componentDidUpdate () {
+    this.renderCircle()
+  }
+
+  renderCircle () {
+    if (this.circles == null) {
+      render((
+        <Circles
+          backgroundColor={this.props.backgroundColor}
+          element={this}
+          ref={(ref) => { this.circles = ref }}
+        />
+      ), this.portal)
+    }
   }
 
   render () {
-    console.log('render')
-    const styles = this.getStyles()
-    const {
-      children
-    } = this.props
-
-    return (
-      <div style={{...styles.root, position: 'relative'}}>
-        {React.cloneElement(React.Children.only(children), {
-          ref: (ref) => {
-            this.content = findDOMNode(ref)
-          }
-        })}
-        <div style={{...styles.circles}}>
-          <div style={{...styles.outerCircle}}/>
-          <div style={{...styles.pulseInnerCircle}}/>
-          <div style={{...styles.pulseOuterCircle}}/>
-        </div>
-      </div>
-    )
+    const child = React.Children.only(this.props.children)
+    return React.cloneElement(child, {
+      style: {
+        ...child.props.style,
+        position: child.props.style != null && child.props.style.position != null && child.props.style.position !== 'static' ? child.props.style.position : 'relative',
+        zIndex: 2
+      }
+    })
   }
 }
 
