@@ -88,18 +88,18 @@ export default class FeatureDiscoveryPrompt extends Component {
 
   open () {
     if (this.content != null) {
-      this.setState({ pos: this.content.getBoundingClientRect(), open: true })
+      this.setState({pos: this.content.getBoundingClientRect(), open: true})
     }
   }
 
   componentDidMount () {
     this.content = findDOMNode(this.props.element)
-    this.setState({ pos: this.content.getBoundingClientRect() })
+    this.setState({pos: this.content.getBoundingClientRect()})
     this.updateInterval = setInterval(() => {
       if (this.state.open) {
         const pos = this.content.getBoundingClientRect()
         if (pos.top !== this.state.pos.top || pos.left !== this.state.pos.left) {
-          this.setState({ pos })
+          this.setState({pos})
         }
       }
     }, 50)

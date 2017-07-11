@@ -1,12 +1,12 @@
 const injectStyle = (style) => {
-  const styleElement = document.createElement('style');
-  let styleSheet = null;
+  const styleElement = document.createElement('style')
+  let styleSheet = null
 
-  document.head.appendChild(styleElement);
+  document.head.appendChild(styleElement)
 
-  styleSheet = styleElement.sheet;
+  styleSheet = styleElement.sheet
 
-  styleSheet.insertRule(style, styleSheet.cssRules.length);
-};
+  styleSheet.insertRule(style, styleSheet.cssRules.length)
+}
 
-export default injectStyle;
+export default injectStyle
