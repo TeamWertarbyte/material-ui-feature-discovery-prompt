@@ -3,7 +3,7 @@ Normal:
 const { RaisedButton,FloatingActionButton } = require('material-ui');
 const { ContentAdd} = require( 'material-ui/svg-icons');
 
-<div>
+<div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
   <RaisedButton label='Click me!' onTouchTap={() => setState({isOpen: true})} />
   <FeatureDiscoveryPrompt
     onRequestClose={() => setState({isOpen: false})}
