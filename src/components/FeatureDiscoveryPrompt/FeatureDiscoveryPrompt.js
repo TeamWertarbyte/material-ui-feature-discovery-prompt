@@ -29,7 +29,6 @@ export default class FeatureDiscoveryPrompt extends Component {
     this.portal.style.zIndex = 1
     this.portal.style.top = 0
     this.portal.style.left = 0
-
     this.renderCircle()
   }
 
@@ -56,6 +55,8 @@ export default class FeatureDiscoveryPrompt extends Component {
           backgroundColor={this.props.backgroundColor}
           element={this}
           ref={(ref) => { this.circles = ref }}
+          title={this.props.title}
+          text={this.props.text}
         />
       ), this.portal)
     }
@@ -81,5 +82,9 @@ FeatureDiscoveryPrompt.propTypes = {
   /** The node which will be featured. */
   children: PropTypes.node.isRequired,
   /** Override the inline-styles of the circles element. */
-  style: PropTypes.object
+  style: PropTypes.object,
+  /** Title **/
+  title: PropTypes.string.isRequired,
+  /** Info text **/
+  text: PropTypes.string.isRequired
 }

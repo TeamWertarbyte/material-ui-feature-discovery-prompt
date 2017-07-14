@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
 import injectStyle from './injectStyle'
-
+import Text from './Text'
 /**
  * Material design feature discovery prompt
  * @see [Feature discovery](https://material.io/guidelines/growth-communications/feature-discovery.html#feature-discovery-design)
@@ -30,14 +30,32 @@ export default class FeatureDiscoveryPrompt extends Component {
         width: 1
       }
     }
+    this.handleResize = () => {
+      this.onResize(window.innerWidth)
+    }
+  }
+
+  onResize (value) {
+    this.getComponentPosition()
+    const vw = (window.innerWidth * window.devicePixelRatio)
+    const vh = (window.innerHeight * window.devicePixelRatio)
+    const drawTextAboveCenter = ((vh / 2) / this.state.pos.top < 1.0)
+    const drawTextLeftOfCenter = ((vw / 2) / this.state.pos.top > 1.0)
+    //Todo: check the other side
+    const minimalDistanceToViewport = vw - (this.state.pos.left + (this.state.pos.width / 2))
+    this.setState({drawTextAboveCenter, drawTextLeftOfCenter, minimalDistanceToViewport})
+
   }
 
   getStyles () {
     const {backgroundColor} = this.props
-    const {pos, open} = this.state
+    const {pos, open, drawTextAboveCenter, drawTextLeftOfCenter, minimalDistanceToViewport} = this.state
     const circleSize = pos.width + 40
     const outerCircleSize = Math.min(window.innerWidth, 900)
-
+    const textBoxHeight = 100
+    const textBoxPaddingAtCircle = (900 * (1 / outerCircleSize)) * 50
+    const textBoxPadding = 20
+    console.log(1000 * (1 / outerCircleSize))
     return {
       root: {
         zIndex: 1000
@@ -82,6 +100,19 @@ export default class FeatureDiscoveryPrompt extends Component {
         borderRadius: '50%',
         backgroundColor,
         opacity: open ? 0.9 : 0
+      },
+      textBox: {
+        fontFamily: 'Roboto',
+        position: 'relative',
+        zIndex: 25000,
+        paddingLeft: textBoxPaddingAtCircle,
+        paddingRight: textBoxPadding,
+        width: ((outerCircleSize / 2) + Math.min(minimalDistanceToViewport, (outerCircleSize / 2))) - (textBoxPaddingAtCircle + textBoxPadding),
+        height: textBoxHeight,
+        marginTop: drawTextAboveCenter ? (outerCircleSize / 2) - (circleSize / 2) - textBoxHeight - 20 : (outerCircleSize / 2) + (circleSize / 2) + 20,
+        //marginLeft: drawTextLeftOfCenter ? (outerCircleSize / 2) + (circleSize / 2) : (outerCircleSize / 2) - (circleSize / 2) - textBoxHeight,
+        color: 'white',
+        fontSize: '16pt'
       }
     }
   }
@@ -93,19 +124,28 @@ export default class FeatureDiscoveryPrompt extends Component {
   }
 
   componentDidMount () {
+    window.addEventListener('resize', this.handleResize)
+    window.addEventListener('scroll', this.handleResize)
     this.content = findDOMNode(this.props.element)
     this.setState({pos: this.content.getBoundingClientRect()})
     this.updateInterval = setInterval(() => {
-      if (this.state.open) {
-        const pos = this.content.getBoundingClientRect()
-        if (pos.top !== this.state.pos.top || pos.left !== this.state.pos.left) {
-          this.setState({pos})
-        }
-      }
+      this.getComponentPosition()
     }, 50)
+
+  }
+
+  getComponentPosition () {
+    if (this.state.open) {
+      const pos = this.content.getBoundingClientRect()
+      if (pos.top !== this.state.pos.top || pos.left !== this.state.pos.left) {
+        this.setState({pos})
+      }
+    }
   }
 
   componentWillUnmount () {
+    window.removeEventListener('resize', this.handleResize)
+    window.removeEventListener('scroll', this.handleResize)
     clearInterval(this.updateInterval)
     this.content = null
   }
@@ -116,9 +156,14 @@ export default class FeatureDiscoveryPrompt extends Component {
     return (
       <div style={styles.root}>
         <div style={styles.circles}>
-          <div style={styles.outerCircle} />
-          <div style={styles.pulseInnerCircle} />
-          <div style={styles.pulseOuterCircle} />
+          <div style={styles.outerCircle}>
+            <div style={styles.textBox}>
+              <Text type='title' style={{color: 'white'}}>{this.props.title}</Text><br/>
+              <Text type='body1' style={{color: 'white'}}>{this.props.text}</Text>
+            </div>
+          </div>
+          <div style={styles.pulseInnerCircle}/>
+          <div style={styles.pulseOuterCircle}/>
         </div>
       </div>
     )
@@ -133,5 +178,9 @@ FeatureDiscoveryPrompt.propTypes = {
   /** The node which will be featured. */
   children: PropTypes.node.isRequired,
   /** Override the inline-styles of the circles element. */
-  style: PropTypes.object
+  style: PropTypes.object,
+  /** Title **/
+  title: PropTypes.string.isRequired,
+  /** Info text **/
+  text: PropTypes.string.isRequired
 }

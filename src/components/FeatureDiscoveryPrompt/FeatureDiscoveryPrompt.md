@@ -9,8 +9,10 @@ const { ContentAdd} = require( 'material-ui/svg-icons');
     onRequestClose={() => setState({isOpen: false})}
     open={state.isOpen}
     backgroundColor='rgb(0,150,136)'
+    title="Title"
+    text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor"
   >
-    <FloatingActionButton  label='Click me!' onTouchTap={() => setState({isOpen: true})}> <ContentAdd /> </FloatingActionButton>
+    <FloatingActionButton onTouchTap={() => setState({isOpen: true})}> <ContentAdd /> </FloatingActionButton>
   </FeatureDiscoveryPrompt>
 </div>
 ```
