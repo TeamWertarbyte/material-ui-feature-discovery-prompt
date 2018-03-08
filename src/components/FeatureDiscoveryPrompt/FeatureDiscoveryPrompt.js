@@ -78,7 +78,7 @@ FeatureDiscoveryPrompt.propTypes = {
   /** Defines if the prompt is visible. */
   open: PropTypes.bool.isRequired,
   /** Fired when the the prompt is visible and clicked. */
-  onRequestClose: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
   /** The node which will be featured. */
   children: PropTypes.node.isRequired,
   /** Override the inline-styles of the circles element. */

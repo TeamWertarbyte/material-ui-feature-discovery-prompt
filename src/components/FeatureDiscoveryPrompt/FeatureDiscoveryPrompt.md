@@ -6,7 +6,7 @@ const { Add } = require( 'material-ui-icons');
 <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
   <Button onClick={() => setState({isOpen: true})}>Click me!</Button>
   <FeatureDiscoveryPrompt
-    onRequestClose={() => setState({isOpen: false})}
+    onClose={() => setState({isOpen: false})}
     open={state.isOpen}
     backgroundColor='rgb(0,150,136)'
     title="Title"
