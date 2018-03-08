@@ -1,10 +1,10 @@
 Normal:
 ```
-const { RaisedButton,FloatingActionButton } = require('material-ui');
-const { ContentAdd} = require( 'material-ui/svg-icons');
+const { Button } = require('material-ui');
+const { Add } = require( 'material-ui-icons');
 
 <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-  <RaisedButton label='Click me!' onTouchTap={() => setState({isOpen: true})} />
+  <Button onClick={() => setState({isOpen: true})}>Click me!</Button>
   <FeatureDiscoveryPrompt
     onRequestClose={() => setState({isOpen: false})}
     open={state.isOpen}
@@ -12,7 +12,13 @@ const { ContentAdd} = require( 'material-ui/svg-icons');
     title="Title"
     text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor"
   >
-    <FloatingActionButton onTouchTap={() => setState({isOpen: true})}> <ContentAdd /> </FloatingActionButton>
+    <Button
+      color='secondary'
+      variant='fab'
+      onClick={() => setState({isOpen: false})}
+    >
+      <Add />
+    </Button>
   </FeatureDiscoveryPrompt>
 </div>
 ```

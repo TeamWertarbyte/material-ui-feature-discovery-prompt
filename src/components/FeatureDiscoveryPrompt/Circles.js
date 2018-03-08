@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
+import { Typography } from 'material-ui'
 import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
 import injectStyle from './injectStyle'
-import Text from './Text'
 /**
  * Material design feature discovery prompt
  * @see [Feature discovery](https://material.io/guidelines/growth-communications/feature-discovery.html#feature-discovery-design)
@@ -158,8 +158,8 @@ export default class FeatureDiscoveryPrompt extends Component {
         <div style={styles.circles}>
           <div style={styles.outerCircle}>
             <div style={styles.textBox}>
-              <Text type='title' style={{color: 'white'}}>{this.props.title}</Text><br/>
-              <Text type='body1' style={{color: 'white'}}>{this.props.text}</Text>
+              <Typography variant='title' style={{color: 'white'}}>{this.props.title}</Typography><br/>
+              <Typography variant='body1' style={{color: 'white'}}>{this.props.text}</Typography>
             </div>
           </div>
           <div style={styles.pulseInnerCircle}/>
