@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "babel src -d lib",
-    "prepublish": "babel src -d lib",
+    "prepare": "babel src -d lib",
     "styleguide": "styleguidist server",
     "styleguide:build": "styleguidist build",
     "publish-docs": "npm run styleguide:build && npm run gh-pages",
