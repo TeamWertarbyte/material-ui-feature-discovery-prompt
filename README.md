@@ -14,19 +14,27 @@ npm i --save material-ui-feature-discovery-prompt
 
 ## Usage
 ```js
-import SearchBar from 'material-ui-feature-discovery-prompt'
+import FeatureDiscoveryPrompt from 'material-ui-feature-discovery-prompt'
 
 // ...
 render() {
   return(
     <div>
-      <RaisedButton label='Click me!' onTouchTap={() => setState({isOpen: true})} />
+      <Button onClick={() => setState({isOpen: true})}>Click me!</Button>
       <FeatureDiscoveryPrompt
-        onRequestClose={() => setState({isOpen: false})}
+        onClose={() => setState({isOpen: false})}
         open={state.isOpen}
         backgroundColor='rgb(0,150,136)'
-      >
-        <FloatingActionButton  label='Click me!' onTouchTap={() => setState({isOpen: true})}> <ContentAdd /> </FloatingActionButton>
+        title="Title"
+        text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor"
+       >
+          <Button
+            color='secondary'
+            variant='fab'
+            onClick={() => setState({isOpen: false})}
+          >
+            <Add />
+          </Button>
       </FeatureDiscoveryPrompt>
     </div>
   )
@@ -37,8 +45,10 @@ render() {
 |----------------|------------|------------|--------------------------------
 |children*       | `node`     |            | The node which will be featured.
 |open*           | `bool`     |            | Defines if the prompt is visible.
-|onRequestClose* | `func`     |            | Fired when the the prompt is visible and clicked.
+|onClose*        | `func`     |            | Fired when the the prompt is visible and clicked.
 |style           | `object`   |            | Override the inline-styles of the root element.
+|title           | `string`   |            | Title.
+|text            | `string`   |            | Info text.
 
 \* required property
 
