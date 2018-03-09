@@ -4,6 +4,10 @@ const { Button } = require('material-ui');
 const { teal } = require('material-ui/colors');
 const { Add } = require( 'material-ui-icons');
 
+initialState = {
+  isOpen: false
+};
+
 <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
   <Button onClick={() => setState({isOpen: true})}>Click me!</Button>
   <FeatureDiscoveryPrompt
