@@ -33,6 +33,11 @@ export default class FeatureDiscoveryPrompt extends Component {
     this.handleResize = () => {
       this.onResize(window.innerWidth)
     }
+    this.handleClick = (e) => {
+      if(!this.node.contains(e.target)){
+        this.props.onClose()
+      }
+    }
   }
 
   onResize (value) {
@@ -44,7 +49,6 @@ export default class FeatureDiscoveryPrompt extends Component {
     //Todo: check the other side
     const minimalDistanceToViewport = vw - (this.state.pos.left + (this.state.pos.width / 2))
     this.setState({drawTextAboveCenter, drawTextLeftOfCenter, minimalDistanceToViewport})
-
   }
 
   getStyles () {
@@ -117,6 +121,21 @@ export default class FeatureDiscoveryPrompt extends Component {
     }
   }
 
+  close () {
+    if (this.content != null) {
+      this.setState({
+        pos: {
+          top: 1,
+          right: 1,
+          bottom: 1,
+          left: 1,
+          width: 1
+        },
+        open: false
+      })
+    }
+  }
+
   open () {
     if (this.content != null) {
       this.setState({pos: this.content.getBoundingClientRect(), open: true})
@@ -131,7 +150,7 @@ export default class FeatureDiscoveryPrompt extends Component {
     this.updateInterval = setInterval(() => {
       this.getComponentPosition()
     }, 50)
-
+    window.addEventListener('mousedown', this.handleClick, false)
   }
 
   getComponentPosition () {
@@ -146,6 +165,7 @@ export default class FeatureDiscoveryPrompt extends Component {
   componentWillUnmount () {
     window.removeEventListener('resize', this.handleResize)
     window.removeEventListener('scroll', this.handleResize)
+    window.removeEventListener('mousedown', this.handleClick, false)
     clearInterval(this.updateInterval)
     this.content = null
   }
@@ -154,12 +174,11 @@ export default class FeatureDiscoveryPrompt extends Component {
     const styles = this.getStyles()
 
     return (
-      <div style={styles.root}>
+      <div ref={node => this.node = node} style={styles.root}>
         <div style={styles.circles}>
           <div style={styles.outerCircle}>
             <div style={styles.textBox}>
               <Typography variant='title' style={{color: 'white'}}>{this.props.title}</Typography><br/>
-              <Typography variant='body1' style={{color: 'white'}}>{this.props.text}</Typography>
               <Typography variant='body1' style={{color: 'white'}}>{this.props.description}</Typography>
             </div>
           </div>
@@ -176,8 +195,6 @@ FeatureDiscoveryPrompt.propTypes = {
   open: PropTypes.bool.isRequired,
   /** Fired when the the prompt is visible and clicked. */
   onClose: PropTypes.func.isRequired,
-  /** The node which will be featured. */
-  children: PropTypes.node.isRequired,
   /** Override the inline-styles of the circles element. */
   style: PropTypes.object,
   /** Title **/

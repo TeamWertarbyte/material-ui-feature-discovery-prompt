@@ -39,8 +39,9 @@ export default class FeatureDiscoveryPrompt extends Component {
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.open && !this.props.open) {
-      console.log(this.circles)
       this.circles.open()
+    } else if (!nextProps.open && this.props.open) {
+      this.circles.close()
     }
   }
 
@@ -53,6 +54,7 @@ export default class FeatureDiscoveryPrompt extends Component {
       const {
         backgroundColor,
         description,
+        onClose,
         title
       } = this.props
 
@@ -61,6 +63,7 @@ export default class FeatureDiscoveryPrompt extends Component {
           backgroundColor={backgroundColor}
           description={description}
           element={this}
+          onClose={onClose}
           ref={(ref) => { this.circles = ref }}
           title={title}
         />
