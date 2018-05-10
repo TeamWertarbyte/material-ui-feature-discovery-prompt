@@ -138,11 +138,13 @@ export default class FeatureDiscoveryPrompt extends Component {
 
   open () {
     if (this.content != null) {
+      this.handleResize()
       this.setState({pos: this.content.getBoundingClientRect(), open: true})
     }
   }
 
   componentDidMount () {
+    this.handleResize()
     window.addEventListener('resize', this.handleResize)
     window.addEventListener('scroll', this.handleResize)
     this.content = findDOMNode(this.props.element)
