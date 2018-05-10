@@ -3,11 +3,8 @@ import { Typography } from 'material-ui'
 import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
 import injectStyle from './injectStyle'
-/**
- * Material design feature discovery prompt
- * @see [Feature discovery](https://material.io/guidelines/growth-communications/feature-discovery.html#feature-discovery-design)
- */
-export default class FeatureDiscoveryPrompt extends Component {
+
+export default class Circles extends Component {
   constructor (props) {
     super(props)
     injectStyle(`
@@ -40,7 +37,7 @@ export default class FeatureDiscoveryPrompt extends Component {
     }
   }
 
-  onResize (value) {
+  onResize () {
     this.getComponentPosition()
     const vw = (window.innerWidth * window.devicePixelRatio)
     const vh = (window.innerHeight * window.devicePixelRatio)
@@ -59,7 +56,8 @@ export default class FeatureDiscoveryPrompt extends Component {
     const textBoxHeight = 100
     const textBoxPaddingAtCircle = (900 * (1 / outerCircleSize)) * 50
     const textBoxPadding = 20
-    console.log(1000 * (1 / outerCircleSize))
+    const textBoxWidth = ((outerCircleSize / 2) + Math.min(minimalDistanceToViewport, (outerCircleSize / 2))) - (textBoxPaddingAtCircle + textBoxPadding)
+
     return {
       root: {
         zIndex: 1000
@@ -111,7 +109,7 @@ export default class FeatureDiscoveryPrompt extends Component {
         zIndex: 25000,
         paddingLeft: textBoxPaddingAtCircle,
         paddingRight: textBoxPadding,
-        width: ((outerCircleSize / 2) + Math.min(minimalDistanceToViewport, (outerCircleSize / 2))) - (textBoxPaddingAtCircle + textBoxPadding),
+        width: textBoxWidth ? textBoxWidth : 0,
         height: textBoxHeight,
         marginTop: drawTextAboveCenter ? (outerCircleSize / 2) - (circleSize / 2) - textBoxHeight - 20 : (outerCircleSize / 2) + (circleSize / 2) + 20,
         //marginLeft: drawTextLeftOfCenter ? (outerCircleSize / 2) + (circleSize / 2) : (outerCircleSize / 2) - (circleSize / 2) - textBoxHeight,
@@ -123,16 +121,7 @@ export default class FeatureDiscoveryPrompt extends Component {
 
   close () {
     if (this.content != null) {
-      this.setState({
-        pos: {
-          top: 1,
-          right: 1,
-          bottom: 1,
-          left: 1,
-          width: 1
-        },
-        open: false
-      })
+      this.setState({pos: this.content.getBoundingClientRect(), open: false})
     }
   }
 
@@ -147,12 +136,12 @@ export default class FeatureDiscoveryPrompt extends Component {
     this.handleResize()
     window.addEventListener('resize', this.handleResize)
     window.addEventListener('scroll', this.handleResize)
+    window.addEventListener('mousedown', this.handleClick, false)
     this.content = findDOMNode(this.props.element)
     this.setState({pos: this.content.getBoundingClientRect()})
     this.updateInterval = setInterval(() => {
       this.getComponentPosition()
     }, 50)
-    window.addEventListener('mousedown', this.handleClick, false)
   }
 
   getComponentPosition () {
@@ -192,15 +181,13 @@ export default class FeatureDiscoveryPrompt extends Component {
   }
 }
 
-FeatureDiscoveryPrompt.propTypes = {
-  /** Defines if the prompt is visible. */
-  open: PropTypes.bool.isRequired,
+Circles.propTypes = {
   /** Fired when the the prompt is visible and clicked. */
   onClose: PropTypes.func.isRequired,
   /** Override the inline-styles of the circles element. */
   style: PropTypes.object,
-  /** Title **/
+  /** Defines the title text **/
   title: PropTypes.string.isRequired,
-  /** Info text **/
+  /** Defines the description text **/
   description: PropTypes.string.isRequired
 }
