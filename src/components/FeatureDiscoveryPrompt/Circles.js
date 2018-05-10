@@ -160,6 +160,7 @@ export default class FeatureDiscoveryPrompt extends Component {
             <div style={styles.textBox}>
               <Typography variant='title' style={{color: 'white'}}>{this.props.title}</Typography><br/>
               <Typography variant='body1' style={{color: 'white'}}>{this.props.text}</Typography>
+              <Typography variant='body1' style={{color: 'white'}}>{this.props.description}</Typography>
             </div>
           </div>
           <div style={styles.pulseInnerCircle}/>
@@ -182,5 +183,5 @@ FeatureDiscoveryPrompt.propTypes = {
   /** Title **/
   title: PropTypes.string.isRequired,
   /** Info text **/
-  text: PropTypes.string.isRequired
+  description: PropTypes.string.isRequired
 }

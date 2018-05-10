@@ -50,13 +50,19 @@ export default class FeatureDiscoveryPrompt extends Component {
 
   renderCircle () {
     if (this.circles == null) {
+      const {
+        backgroundColor,
+        description,
+        title
+      } = this.props
+
       render((
         <Circles
-          backgroundColor={this.props.backgroundColor}
+          backgroundColor={backgroundColor}
+          description={description}
           element={this}
           ref={(ref) => { this.circles = ref }}
-          title={this.props.title}
-          text={this.props.text}
+          title={title}
         />
       ), this.portal)
     }
@@ -83,8 +89,8 @@ FeatureDiscoveryPrompt.propTypes = {
   children: PropTypes.node.isRequired,
   /** Override the inline-styles of the circles element. */
   style: PropTypes.object,
-  /** Title **/
+  /** Defines the title text **/
   title: PropTypes.string.isRequired,
-  /** Info text **/
-  text: PropTypes.string.isRequired
+  /** Defines the description text **/
+  description: PropTypes.string.isRequired
 }

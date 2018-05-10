@@ -15,7 +15,7 @@ initialState = {
     open={state.isOpen}
     backgroundColor={teal[500]}
     title="Title"
-    text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor"
+    description="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor"
   >
     <Button
       color='secondary'

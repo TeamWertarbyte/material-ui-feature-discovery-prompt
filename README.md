@@ -26,7 +26,7 @@ render() {
         open={state.isOpen}
         backgroundColor='rgb(0,150,136)'
         title="Title"
-        text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor"
+        description="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor"
        >
           <Button
             color='secondary'
@@ -47,8 +47,8 @@ render() {
 |open*           | `bool`     |            | Defines if the prompt is visible.
 |onClose*        | `func`     |            | Fired when the the prompt is visible and clicked.
 |style           | `object`   |            | Override the inline-styles of the root element.
-|title           | `string`   |            | Title.
-|text            | `string`   |            | Info text.
+|title           | `string`   |            | Defines the title text.
+|description     | `string`   |            | Defines the description text.
 
 \* required property
 
