@@ -4,7 +4,9 @@
 
 Provide value and encourage return visits by introducing users to new features and functionality at contextually relevant moments.
 
-See this component in [action](https://mui.wertarbyte.com/#material-ui-feature-discovery-prompt/)
+![Example](demo.gif)
+
+See this component in [action](https://next.mui.wertarbyte.com/#material-ui-feature-discovery-prompt/)
 
 ## Installation
 ```shell
