@@ -1,7 +1,6 @@
 # Material Feature Discovery Prompt
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-[![Build Status](https://travis-ci.org/TeamWertarbyte/material-ui-feature-discovery-prompt.svg?branch=master)](https://travis-ci.org/TeamWertarbyte/material-ui-search-bar)
-[![Greenkeeper badge](https://badges.greenkeeper.io/TeamWertarbyte/material-ui-feature-discovery-prompt.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/TeamWertarbyte/material-ui-feature-discovery-prompt.svg?branch=master)](https://travis-ci.org/TeamWertarbyte/material-ui-feature-discovery-prompt)
 
 Provide value and encourage return visits by introducing users to new features and functionality at contextually relevant moments.
 
