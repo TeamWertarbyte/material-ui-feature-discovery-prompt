@@ -1,6 +1,6 @@
 {
   "name": "material-ui-feature-discovery-prompt",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Material style feature discovery prompt",
   "main": "lib/index.js",
   "scripts": {
