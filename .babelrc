@@ -1,12 +1,12 @@
 {
   "presets": [
-    "es2015",
-    "react",
-    "stage-0"
-  ],
-  "plugins": [
-    ["direct-import", ["material-ui", "material-ui-icons"]],
-    "transform-runtime",
-    "transform-decorators-legacy"
+    [
+      "@babel/env",
+      {
+        "modules": false,
+        "useBuiltIns": "usage"
+      }
+    ],
+    "@babel/react"
   ]
 }
