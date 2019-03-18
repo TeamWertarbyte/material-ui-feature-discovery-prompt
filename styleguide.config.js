@@ -1,6 +1,7 @@
 module.exports = {
   skipComponentsWithoutExample: true,
-  components: 'src/components/**/[A-Z]*.js',
+  components: '**/components/**/[A-Z]*.js',
+  ignore: ['**/components/FeatureDiscoveryPrompt/Circles.js'],
   webpackConfig: {
     module: {
       rules: [
