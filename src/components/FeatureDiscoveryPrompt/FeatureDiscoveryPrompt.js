@@ -4,8 +4,8 @@ import { render, unmountComponentAtNode } from 'react-dom'
 import Circles from './Circles'
 
 /**
- * Material design feature discovery prompt
- * @see [Feature discovery](https://material.io/guidelines/growth-communications/feature-discovery.html#feature-discovery-design)
+ * Material Design feature discovery prompt
+ * @see [Feature discovery](https://material.io/archive/guidelines/growth-communications/feature-discovery.html)
  */
 export default class FeatureDiscoveryPrompt extends Component {
   constructor (props) {
