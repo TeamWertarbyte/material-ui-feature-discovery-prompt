@@ -1,8 +1,9 @@
 Normal:
 ```
-const { Button } = require('material-ui');
-const { teal } = require('material-ui/colors');
-const { Add } = require( 'material-ui-icons');
+import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
+import teal from '@material-ui/core/colors/teal';
+import Add from '@material-ui/icons/Add';
 
 initialState = {
   isOpen: false
@@ -17,13 +18,12 @@ initialState = {
     title="Title"
     description="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor"
   >
-    <Button
+    <Fab
       color='secondary'
-      variant='fab'
       onClick={() => setState({isOpen: false})}
     >
       <Add />
-    </Button>
+    </Fab>
   </FeatureDiscoveryPrompt>
 </div>
 ```

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Typography } from 'material-ui'
+import Typography from '@material-ui/core/Typography';
 import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
 import injectStyle from './injectStyle'
