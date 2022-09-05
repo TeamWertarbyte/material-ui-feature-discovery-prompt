@@ -30,27 +30,27 @@
   },
   "homepage": "https://github.com/TeamWertarbyte/material-ui-feature-discovery-prompt#readme",
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.3.4",
-    "@babel/preset-env": "^7.3.4",
-    "@babel/preset-react": "^7.0.0",
-    "@material-ui/core": "^3.9.2",
-    "@material-ui/icons": "^3.0.2",
+    "@babel/cli": "^7.18.10",
+    "@babel/core": "^7.18.13",
+    "@babel/preset-env": "^7.18.10",
+    "@babel/preset-react": "^7.18.6",
+    "@mui/material": "^5.10.3",
+    "@mui/icons-material": "^5.10.3",
     "@webpack-blocks/babel": "^2.0.0-rc",
-    "babel-loader": "^8.0.5",
+    "babel-loader": "^8.2.5",
     "core-js": "^2.6.5",
     "gh-pages": "^1.0.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-styleguidist": "^9.0.4",
-    "webpack": "^4.29.6"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-styleguidist": "^11.2.0",
+    "webpack": "^5.74.0"
   },
   "peerDependencies": {
-    "@material-ui/core": "^3.9.2",
-    "react": "16.x"
+    "@mui/material": "^5.10.3",
+    "react": "17.x"
   },
   "dependencies": {
     "prop-types": "^15.5.8",
-    "react-height": "^3.0.0"
+    "react-height": "^3.0.2"
   }
 }
