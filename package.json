@@ -39,7 +39,7 @@
     "@webpack-blocks/babel": "^2.1.0",
     "babel-loader": "^8.2.5",
     "core-js": "^3.25.0",
-    "gh-pages": "^1.0.0",
+    "gh-pages": "^4.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-styleguidist": "^11.2.0",
@@ -50,7 +50,7 @@
     "react": "17.x"
   },
   "dependencies": {
-    "prop-types": "^15.5.8",
+    "prop-types": "^15.8.1",
     "react-height": "^3.0.2"
   }
 }
