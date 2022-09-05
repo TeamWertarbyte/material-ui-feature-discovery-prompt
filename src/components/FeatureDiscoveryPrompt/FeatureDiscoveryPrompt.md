@@ -1,9 +1,9 @@
 Normal:
 ```
-import Button from '@material-ui/core/Button';
-import Fab from '@material-ui/core/Fab';
-import teal from '@material-ui/core/colors/teal';
-import Add from '@material-ui/icons/Add';
+import Button from '@mui/material/Button';
+import Fab from '@mui/material/Fab';
+import teal from '@mui/material/colors/teal';
+import Add from '@mui/icons-material/Add';
 
 initialState = {
   isOpen: false
