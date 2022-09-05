@@ -50,6 +50,8 @@
     "react": "17.x"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.9.3",
     "prop-types": "^15.8.1",
     "react-height": "^3.0.2"
   }
